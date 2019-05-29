@@ -6,20 +6,20 @@ public class Timer {
 
     private static Timer timer;
     private static Thread worker;
-    private static int WORK_DURATION = 240;
-    private static volatile int T = WORK_DURATION;
+    public static int WORK_DURATION = 240;
+    private static volatile int T = 0;
     private static volatile boolean active = true;
 
     static {
         timer = new Timer();
         worker = new Thread(() -> {
-            while (T > 0) {
+            while (T < WORK_DURATION) {
                 if (!active)
                     return;
                 else
                     try {
                         sleep(1000);
-                        T--;
+                        T++;
                         System.out.println("Time : " + T);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -29,7 +29,7 @@ public class Timer {
     }
 
     public static synchronized void startTimer() {
-        if (T < WORK_DURATION) {
+        if (T > 0) {
             System.out.println("Timer Already Started ! Call Stop(); to start it Again");
         } else {
             active = true;

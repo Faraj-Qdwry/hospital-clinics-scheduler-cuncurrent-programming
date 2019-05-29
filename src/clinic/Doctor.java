@@ -20,7 +20,7 @@ public class Doctor implements Callable<DoctorReport> {
     @Override
     public DoctorReport call() throws Exception {
         DoctorReport doctorReport = new DoctorReport(id,clinic.getId());
-        while (Timer.getCurranTime() > 0) {
+        while (Timer.getCurranTime() < Timer.WORK_DURATION) {
             //check if sleep time
             if (treatedPatients == 8){
                 isAvailable = false;

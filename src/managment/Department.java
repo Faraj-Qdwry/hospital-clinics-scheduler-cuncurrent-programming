@@ -1,7 +1,6 @@
 package managment;
 
 import utilities.*;
-import static java.lang.Thread.sleep;
 
 public class Department {
 
@@ -14,8 +13,9 @@ public class Department {
 
     public static void main(String[] args) throws InterruptedException {
 
+        Timer.startTimer();
 
-        //Timer.getInstance().join();
+
 
         // Create the file reader thread
 
