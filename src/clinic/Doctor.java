@@ -8,7 +8,7 @@ import static java.lang.Thread.sleep;
 public class Doctor implements Callable<DoctorReport> {
     private int SLEEP_TIME = 15*1000;
     private volatile boolean isAvailable = true;
-    private volatile int treated = 0;
+    private volatile int treatedPatients = 0;
     private Clinic clinic;
     private String id;
 
@@ -22,7 +22,7 @@ public class Doctor implements Callable<DoctorReport> {
         DoctorReport doctorReport = new DoctorReport(id,clinic.getId());
         while (Timer.getCurranTime() > 0) {
             //check if sleep time
-            if (treated == 8){
+            if (treatedPatients == 8){
                 isAvailable = false;
                 sleep(SLEEP_TIME);
                 isAvailable = true;
@@ -33,7 +33,7 @@ public class Doctor implements Callable<DoctorReport> {
             System.out.println("Doctor : "+id+" At Clinic : "+clinic.getId()+"Consulting patient : " + patient.getId());
             doctorReport.consult(patient);
             sleep(patient.getConsultationTime() * 1000);
-            treated++;
+            treatedPatients++;
         }
         return doctorReport;
     }

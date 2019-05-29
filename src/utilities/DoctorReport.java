@@ -19,4 +19,16 @@ public class DoctorReport {
     public void consult(Patient patient) {
         patients.add(patient);
     }
+
+    public String getDocId() {
+        return docId;
+    }
+
+    public String getClinicId() {
+        return clinicId;
+    }
+
+    public List<Patient> getPatients() {
+        return patients;
+    }
 }
