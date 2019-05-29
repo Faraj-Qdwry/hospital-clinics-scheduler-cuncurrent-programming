@@ -9,22 +9,31 @@ public class Clinic {
 
     private int PATENTS_LIMIT = 3;
     private ArrayBlockingQueue<Patient> patients;
-    private Doctor doctor;
+    private String id;
 
-    public Clinic() {
+    public Clinic(String id) {
+        this.id = id;
         patients = new ArrayBlockingQueue(PATENTS_LIMIT, true);
-        this.doctor = new Doctor(patients);
+    }
+
+    /**
+     * gives next patient , if queue is empty it waits */
+    public Patient getNextPatient() throws InterruptedException {
+        return patients.take();
     }
 
 
-//    public Patient getNextPateint() throws InterruptedException {
-//        return patients.take();
-//    }
-
     /**
-     * @param patient is inserted and true returned if queue is not full else false is returned
-     */
+     * @param patient is inserted and true returned if queue is not full else false is returned */
     public boolean insertPateint(Patient patient) {
         return patients.offer(patient);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -2,37 +2,37 @@ package clinic;
 
 public class Patient {
 
-    private int id ;
-    private int waiting_time;
-    private int consultation_time;
+    private String id ;
+    private int waitingTime;
+    private int consultationTime;
 
-    public Patient(int id, int waiting_time, int consultation_time) {
+    public Patient(String id, int waitingTime, int consultationTime) {
         this.id = id;
-        this.waiting_time = waiting_time;
-        this.consultation_time = consultation_time;
+        this.waitingTime = waitingTime;
+        this.consultationTime = consultationTime;
     }
 
-    public int getId() {
+    public String  getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getWaiting_time() {
-        return waiting_time;
+    public int getWaitingTime() {
+        return waitingTime;
     }
 
-    public void setWaiting_time(int waiting_time) {
-        this.waiting_time = waiting_time;
+    public void setWaitingTime(int waitingTime) {
+        this.waitingTime = waitingTime;
     }
 
-    public int getConsultation_time() {
-        return consultation_time;
+    public int getConsultationTime() {
+        return consultationTime;
     }
 
-    public void setConsultation_time(int consultation_time) {
-        this.consultation_time = consultation_time;
+    public void setConsultationTime(int consultationTime) {
+        this.consultationTime = consultationTime;
     }
 }
