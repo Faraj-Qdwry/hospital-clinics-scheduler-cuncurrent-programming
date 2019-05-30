@@ -25,8 +25,8 @@ public class Clinic {
 
     /**
      * @param patient is inserted and true returned if queue is not full else false is returned */
-    public boolean insertPateint(Patient patient) {
-        return patients.offer(patient);
+    public void insertPatient(Patient patient) {
+        patients.offer(patient);
     }
 
     public String getId() {

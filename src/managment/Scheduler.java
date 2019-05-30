@@ -3,8 +3,6 @@ package managment;
 import clinic.Doctor;
 import utilities.Timer;
 
-import javax.print.Doc;
-import java.sql.Time;
 import java.util.Iterator;
 
 public class Scheduler implements Runnable {
@@ -21,8 +19,9 @@ public class Scheduler implements Runnable {
 
                     if (currentDoctor.isAvailable()) {
                         if (currentDoctor.getTreatedPatients() - Department.doctorsHeap.peek().getTreatedPatients() < 3) {
-                            currentDoctor.getClinic().insertPateint(Department.patientQueue.remove());
-                            currentDoctor.notify();
+                            currentDoctor.getClinic().insertPatient(Department.patientQueue.remove());
+                            //no need to notify cause doctor is just blocked till there is a new patient
+                            //currentDoctor.notify();
                             patientAttended = true;
                             break;
                         }
