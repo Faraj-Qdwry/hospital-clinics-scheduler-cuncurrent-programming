@@ -5,6 +5,7 @@ import clinic.Doctor;
 import clinic.Patient;
 import utilities.*;
 
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.concurrent.ExecutorService;
@@ -19,6 +20,7 @@ public class Department {
 
     // number of doctors available in the department
     protected static int doctorsAvailable = 0;
+    static ArrayList<Doctor> doctorsList;
     // a min heap to store all the available doctors that have been assigned to clinics
     protected static PriorityQueue<Doctor> doctorsHeap;
 
@@ -31,15 +33,24 @@ public class Department {
         doctorsAvailable = doctors;
     }
 
+    public static void setDoctorList(ArrayList<Doctor> doctors){
+        System.out.println(doctors.toString());
+         doctorsList = doctors;
+    }
+
     public static void main(String[] args) throws InterruptedException {
 
         // Create the file reader thread and start it
         Thread fileReaderThread = new Thread(fileReader);
         fileReaderThread.start();
-        // while no number of doctors have been specified yet
-        while (doctorsAvailable <= 0) {
-        }
 
+
+        // while no number of doctors have been specified yet
+        //while (doctorsAvailable <= 0) {
+        //}
+        for (int i = 0; i < doctorsList.size() ; i++) {
+
+        }
         // get and create doctors for the number of doctors, assign them to clinics and run the doctors threads
         ExecutorService doctorsPool = Executors.newFixedThreadPool(doctorsAvailable);
 
