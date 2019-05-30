@@ -1,4 +1,8 @@
 package utilities;
 
-public class ResFileReader {
+public class ResFileReader implements Runnable{
+    @Override
+    public void run() {
+
+    }
 }
