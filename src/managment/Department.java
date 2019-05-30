@@ -1,8 +1,12 @@
 package managment;
 
+import utilities.ResFileReader;
+
 public class Department {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+
+        ResFileReader r = new ResFileReader();
+        r.readFile();
     }
 }
