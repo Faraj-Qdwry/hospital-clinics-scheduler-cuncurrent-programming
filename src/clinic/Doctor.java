@@ -13,6 +13,10 @@ public class Doctor implements Callable<DoctorReport> {
     private Clinic clinic;
     private String id;
 
+    public String getId() {
+        return id;
+    }
+
     public Doctor(String id, Clinic clinic) {
         this.id = id;
         this.clinic = clinic;
@@ -27,14 +31,16 @@ public class Doctor implements Callable<DoctorReport> {
                 isAvailable = false;
                 sleep(SLEEP_TIME);
                 isAvailable = true;
+            } else {
+                // get and consult next patient
+                Patient patient = clinic.getNextPatient();
+                System.out.println("Doctor : " + id + " At Clinic : " + clinic.getId() + "Consulting patient : " + patient.getId());
+                System.out.println("Doctor "+id +" Treated "+treatedPatients);
+                doctorReport.consult(patient);
+                sleep(patient.getConsultationTime() * 1000);
+                treatedPatients++;
+                System.out.println("...................");
             }
-
-            // get and consult next patient
-            Patient patient = clinic.getNextPatient();
-            System.out.println("Doctor : " + id + " At Clinic : " + clinic.getId() + "Consulting patient : " + patient.getId());
-            doctorReport.consult(patient);
-            sleep(patient.getConsultationTime() * 1000);
-            treatedPatients++;
         }
         return doctorReport;
     }
@@ -49,5 +55,10 @@ public class Doctor implements Callable<DoctorReport> {
 
     public int getTreatedPatients() {
         return treatedPatients;
+    }
+
+    public Doctor setClinic(Clinic clinic) {
+        this.clinic = clinic;
+        return this;
     }
 }
