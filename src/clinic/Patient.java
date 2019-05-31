@@ -3,12 +3,12 @@ package clinic;
 public class Patient {
 
     private String id ;
-    private int waitingTime;
+    private int arrivalTime;
     private int consultationTime;
 
-    public Patient(String id, int waitingTime, int consultationTime) {
+    public Patient(String id, int arrivalTime, int consultationTime) {
         this.id = id;
-        this.waitingTime = waitingTime;
+        this.arrivalTime = arrivalTime;
         this.consultationTime = consultationTime;
     }
 
@@ -20,12 +20,12 @@ public class Patient {
         this.id = id;
     }
 
-    public int getWaitingTime() {
-        return waitingTime;
+    public int getArrivalTime() {
+        return arrivalTime;
     }
 
-    public void setWaitingTime(int waitingTime) {
-        this.waitingTime = waitingTime;
+    public void setArrivalTime(int arrivalTime) {
+        this.arrivalTime = arrivalTime;
     }
 
     public int getConsultationTime() {

@@ -31,4 +31,9 @@ public class DoctorReport {
     public List<Patient> getPatients() {
         return patients;
     }
+
+    @Override
+    public String toString() {
+        return "doctor "+docId+" at clinic "+clinicId+" patients "+ patients.size();
+    }
 }
