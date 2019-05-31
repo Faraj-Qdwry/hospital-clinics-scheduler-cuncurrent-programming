@@ -27,7 +27,7 @@ public class ResFileReader implements Runnable {
         int consultationTime = 0;
         ArrayList <Doctor> doctorList = new ArrayList();
         try {
-            try (Scanner inputStream = new Scanner(new FileInputStream("input.txt"))) {
+            try (Scanner inputStream = new Scanner(new FileInputStream("worst input.txt"))) {
                 inputStream.useDelimiter(",");
 
                 while (inputStream.hasNextLine()) {
@@ -75,10 +75,6 @@ public class ResFileReader implements Runnable {
                         else {
                             sleep((arrivalTime - Timer.getCurrentMinute()) * 1000);
                         }
-                        if (Timer.getCurrentMinute() >= Timer.WORK_DURATION)
-                            return;
-
-                        sleep((arrivalTime - Timer.getCurrentMinute()) * 1000);
                         Patient patient = new Patient(Integer.toString(++patientId), arrivalTime, consultationTime);
 
                         Department.patientQueue.put(patient);
