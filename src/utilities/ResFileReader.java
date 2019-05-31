@@ -5,6 +5,7 @@ import clinic.Patient;
 import managment.Department;
 
 import java.io.FileInputStream;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,63 +21,86 @@ public class ResFileReader implements Runnable {
     public void readFile() {
         int patientId = 0;
         int previousPatientTime = 0;
-        int doctors = 0;
+        int doctorsAvailable = 0;
         boolean readPatients = false;
         int arrivalTime = previousPatientTime;
         int consultationTime = 0;
-        ArrayList docs = new ArrayList();
+<<<<<<< HEAD
+        ArrayList <Doctor> docs = new ArrayList();
+=======
+        ArrayList doctorList = new ArrayList();
+
+>>>>>>> 0f33571bf4e470cbabfd88d5946fb872c475fd90
         try {
             try (Scanner inputStream = new Scanner(new FileInputStream("input.txt"))) {
                 inputStream.useDelimiter(",");
 
                 while (inputStream.hasNextLine()) {
 
-
+                    // if not signalled to read patients yet, read number of doctors
                     if (!readPatients) {
                         String doctor = inputStream.next();
                         if (doctor.equalsIgnoreCase("Patients")) {
                             System.out.println("............");
+<<<<<<< HEAD
                             Department.setDoctorList(docs);
                             Department.setDoctorsAvailable(docs.size());
                             Department.readyDocs();
+                            ReportGenerator.addToReport("Doctors Available: "+ doctors+System.lineSeparator());
+                            for(Doctor currentDoctor : docs) {
+                                ReportGenerator.addToReport("Doctor: "+currentDoctor.getId()+System.lineSeparator());
+                            }
+
+=======
+                            Department.setDoctorListFromFile(doctorList);
+                            Department.setDoctorsAvailable(doctorList.size());
+                            Department.setDoctorsReady();
+>>>>>>> 0f33571bf4e470cbabfd88d5946fb872c475fd90
                             readPatients = true;
-                            //continue;
                         } else if (doctor.equalsIgnoreCase("Doctors")) {
                             inputStream.nextLine();
                             doctor = inputStream.next();
                         }
 
+<<<<<<< HEAD
 //                        if (readPatients)
 //                            continue;
+=======
                         System.out.println(doctor);
+>>>>>>> 0f33571bf4e470cbabfd88d5946fb872c475fd90
                         Doctor doc = new Doctor(doctor, null);
-                        docs.add(doc);
-                        doctors++;
+                        doctorList.add(doc);
+                        doctorsAvailable++;
                     }
-                    //System.out.println(readPatients);
                     if (readPatients) {
                         arrivalTime = Integer.parseInt(inputStream.next().trim());
                         consultationTime = Integer.parseInt(inputStream.next().trim());
 
-                        //stop reading
-                        //if ((consultationTime + Timer.getCurranTime()) > Timer.WORK_DURATION) {
-                        //    System.out.println("@@ Hospital closed @@");
-                        //    return;
-                        //}
+<<<<<<< HEAD
+                        if (Timer.getCurrentMinute()==Timer.WORK_DURATION)
+                            return;
 
-                        if (Timer.getCurranTime()==Timer.WORK_DURATION)
+                        if(Timer.getCurrentMinute() == 0){
+                            sleep((arrivalTime - Timer.getCurrentMinute()) * 2000);
+                        }
+                        else {
+                            sleep((arrivalTime - Timer.getCurrentMinute()) * 1000);
+                        }
+                        //previousPatientTime = arrivalTime;
+=======
+
+                        if (Timer.getCurranTime() >= Timer.WORK_DURATION)
                             return;
 
                         sleep((arrivalTime - Timer.getCurranTime()) * 1000);
-                        //previousPatientTime = arrivalTime;
+>>>>>>> 0f33571bf4e470cbabfd88d5946fb872c475fd90
 
                         Patient patient = new Patient(Integer.toString(++patientId), arrivalTime, consultationTime);
 
                         Department.patientQueue.put(patient);
 
-                        System.out.println("----------- >>  Patients : " + patientId + " Arrived At : " + arrivalTime + " Consultation Time :" + consultationTime);
+                        System.out.println("Patient: " + patientId + " Arrived At: " + Timer.getCurrentTime() + " Consultation Time:" + consultationTime);
 
-                        //scheduling = false;
                     }
 
                     inputStream.nextLine();
@@ -85,7 +109,6 @@ public class ResFileReader implements Runnable {
 
         } catch (Exception e) {
             e.printStackTrace();
-            //System.out.println("Exception " + e.getMessage());
         }
     }
 }

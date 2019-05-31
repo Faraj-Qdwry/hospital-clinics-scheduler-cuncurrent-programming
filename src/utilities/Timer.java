@@ -1,5 +1,10 @@
 package utilities;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import static java.lang.Thread.sleep;
 
 public class Timer {
@@ -18,10 +23,12 @@ public class Timer {
                     return;
                 else
                     try {
+                        System.out.println("Time : " + getCurrentTime());
                         sleep(1000);
                         T++;
-                        System.out.println("Time : " + T);
                     } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ParseException e) {
                         e.printStackTrace();
                     }
             }
@@ -44,7 +51,18 @@ public class Timer {
 //        return scopedAt;
 //    }
 
-    public static int getCurranTime() {
+    public static int getCurrentMinute() {
         return T;
+    }
+
+    public static String getCurrentTime() throws ParseException {
+        String myTime = "8:00";
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+        Date d = df.parse(myTime);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(d);
+        cal.add(Calendar.MINUTE, T);
+        String newTime = df.format(cal.getTime());
+        return newTime;
     }
 }

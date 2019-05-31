@@ -13,9 +13,6 @@ public class Doctor implements Callable<DoctorReport> {
     private Clinic clinic;
     private String id;
 
-    public String getId() {
-        return id;
-    }
 
     public Doctor(String id, Clinic clinic) {
         this.id = id;
@@ -25,7 +22,7 @@ public class Doctor implements Callable<DoctorReport> {
     @Override
     public DoctorReport call() throws Exception {
         DoctorReport doctorReport = new DoctorReport(id, clinic.getId());
-        while (Timer.getCurranTime() < Timer.WORK_DURATION) {
+        while (Timer.getCurrentMinute() < Timer.WORK_DURATION) {
             //check if sleep time
             if (treatedPatients == 8) {
                 isAvailable = false;
@@ -33,18 +30,28 @@ public class Doctor implements Callable<DoctorReport> {
                 isAvailable = true;
             } else {
                 // get and consult next patient
-                System.out.println("..........get.........");
                 Patient patient = clinic.getNextPatient();
-                System.out.println("Doctor : " + id + " At Clinic : " + clinic.getId() + "Consulting patient : " + patient.getId()+" $$$ "+id+" Treated "+treatedPatients);
-                //System.out.println("Doctor "+id );
+<<<<<<< HEAD
+                if(patient.getId().equalsIgnoreCase("1")){
+                    ReportGenerator.addToReport(System.lineSeparator());
+                    ReportGenerator.addToReport("Doctors Report:"+System.lineSeparator());
+                }
+                String consultingPatient = Timer.getCurrentTime() + " - Dr. " + id + " is consulting patient " + patient.getId() + " at " + clinic.getId() +" - " + treatedPatients + " patients treated";
+                System.out.println(consultingPatient);
+                ReportGenerator.addToReport(consultingPatient+System.lineSeparator());
+=======
+                System.out.println("Doctor : " + id + " At Clinic : " + clinic.getId() + "Consulting patient : " + patient.getId() + " $$$ " + id + " Treated " + treatedPatients);
+>>>>>>> 0f33571bf4e470cbabfd88d5946fb872c475fd90
                 doctorReport.consult(patient);
                 sleep(patient.getConsultationTime() * 1000);
-
                 treatedPatients++;
-                System.out.println("...................");
             }
         }
         return doctorReport;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public Clinic getClinic() {

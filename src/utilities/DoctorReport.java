@@ -2,6 +2,7 @@ package utilities;
 
 import clinic.Patient;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,13 @@ public class DoctorReport {
 
     @Override
     public String toString() {
-        return "doctor "+docId+" at clinic "+clinicId+" patients "+ patients.size();
+        String doctorReport = "doctor "+docId+" at clinic "+clinicId+" patients "+ patients.size();
+        System.out.println("-----------------");
+        try {
+            ReportGenerator.addToReport(doctorReport + System.lineSeparator());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return doctorReport;
     }
 }
