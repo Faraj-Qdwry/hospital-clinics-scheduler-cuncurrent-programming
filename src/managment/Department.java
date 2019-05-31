@@ -29,6 +29,7 @@ public class Department {
     // number of doctors available in the department
     protected static int doctorsAvailable = 0;
     static ArrayList<Doctor> doctorsFileList;
+    static ArrayList<Doctor> doctorsList;
 
     // a min heap to store all the available doctors that have been assigned to clinics
     protected static PriorityBlockingQueue<Doctor> doctorsHeap;
@@ -41,7 +42,7 @@ public class Department {
         doctorsAvailable = doctors;
     }
 
-    static String clinicNames[] = {"C-0 ", "C-1 ", "C-2 ", "C-3 ", "C-4 ", "C-5 ", "C-6 ", "C-7 ", "C-8 ", "C-9 ", "C-10 "};
+    static String clinicNames[] = {"C-0", "C-1", "C-2", "C-3", "C-4", "C-5", "C-6", "C-7", "C-8", "C-9", "C-10"};
     public volatile static boolean docListReady = false;
 
 
@@ -51,10 +52,7 @@ public class Department {
 
     }
 
-    // set the number of doctors available
-    public static void setDoctorsAvailable(int doctors) {
-        doctorsAvailable = doctors;
-    }
+
     // set the doctors as ready and available to work
     public static void setDoctorsReady() {
         docListReady = true;

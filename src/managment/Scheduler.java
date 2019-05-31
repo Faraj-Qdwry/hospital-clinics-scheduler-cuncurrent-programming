@@ -48,8 +48,8 @@ public class Scheduler implements Runnable {
                                     Department.doctorsHeap.add(doc);
                                 });
                             }
-                        }
 
+                        }
                         sleep(1000);
                         Department.doctorsHeap.add(currentDoctor);
                         break IteratorLoop;
@@ -57,15 +57,8 @@ public class Scheduler implements Runnable {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    sleep(1000);
-                    Department.doctorsHeap.add(currentDoctor);
-                    break IteratorLoop;
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
             }
         }
     }
 }
-
