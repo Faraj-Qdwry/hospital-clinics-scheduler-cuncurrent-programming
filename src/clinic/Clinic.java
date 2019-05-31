@@ -3,17 +3,14 @@ package clinic;
 import java.util.concurrent.ArrayBlockingQueue;
 
 public class Clinic {
-//    Lock lock = new ReentrantLock();
-//    Condition isEmpty = lock.newCondition();
-//    Condition isFull = lock.newCondition();
 
-    private int PATENTS_LIMIT = 3;
+    private int WAITING_PATENTS_LIMIT = 3;
     private ArrayBlockingQueue<Patient> patients;
     private String id;
 
     public Clinic(String id) {
         this.id = id;
-        patients = new ArrayBlockingQueue(PATENTS_LIMIT, true);
+        patients = new ArrayBlockingQueue(WAITING_PATENTS_LIMIT, true);
     }
 
     /**
