@@ -121,18 +121,18 @@ public class Department {
 
     private static void initDataStructures(int size) {
         doctorsHeap = new PriorityBlockingQueue<>(size,
-                (o1, o2) -> {
-                    if (o1.getTreatedPatients() < o2.getTreatedPatients())
-                        return 1;
-                    else if (o2.getTreatedPatients() > o1.getTreatedPatients())
-                        return -1;
-                    else
-                        return 0;
-                }
+                Comparator.comparingInt(Doctor::getTreatedPatients)
         );
 
         patientQueue = new ArrayBlockingQueue<>(size, true);
 
         //scheduler = new Scheduler();
     }
+
+    //                    if (o1.getTreatedPatients() < o2.getTreatedPatients())
+//                        return 1;
+//                    else if (o2.getTreatedPatients() > o1.getTreatedPatients())
+//                        return -1;
+//                    else
+//                        return 0;
 }

@@ -59,10 +59,13 @@ public class ResFileReader implements Runnable {
                         consultationTime = Integer.parseInt(inputStream.next().trim());
 
                         //stop reading
-                        if ((consultationTime + Timer.getCurranTime()) > Timer.WORK_DURATION) {
-                            System.out.println("@@ Hospital closed @@");
+                        //if ((consultationTime + Timer.getCurranTime()) > Timer.WORK_DURATION) {
+                        //    System.out.println("@@ Hospital closed @@");
+                        //    return;
+                        //}
+
+                        if (Timer.getCurranTime()==Timer.WORK_DURATION)
                             return;
-                        }
 
                         sleep((arrivalTime - Timer.getCurranTime()) * 1000);
                         //previousPatientTime = arrivalTime;

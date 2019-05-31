@@ -40,16 +40,21 @@ public class Scheduler implements Runnable {
                         boolean inserted = currentDoctor.getClinic().insertPatient(patient);
 
                         //while doc is full see next doctor // stack is so to return taken doctors after while finish
-                        Stack<Doctor> tempDocs = new Stack();
-                        while (!inserted && currentDoctor.getTreatedPatients() - Department.doctorsHeap.peek().getTreatedPatients() < 3) {
-                            tempDocs.push(currentDoctor);
-                            currentDoctor = Department.doctorsHeap.take();
-                            inserted = currentDoctor.getClinic().insertPatient(patient);
-                        }
 
-                        tempDocs.iterator().forEachRemaining((doc) -> {
-                            Department.doctorsHeap.add(doc);
-                        });
+                        //assert Department.doctorsHeap.peek() != null;
+                        if (Department.doctorsHeap.peek() != null) {
+                            int minTreated = Department.doctorsHeap.peek().getTreatedPatients();
+
+                            Stack<Doctor> tempDocs = new Stack();
+                            while (!inserted && currentDoctor.getTreatedPatients() - minTreated < 3) {
+                                tempDocs.push(currentDoctor);
+                                currentDoctor = Department.doctorsHeap.take();
+                                inserted = currentDoctor.getClinic().insertPatient(patient);
+                            }
+                            tempDocs.iterator().forEachRemaining((doc) -> {
+                                Department.doctorsHeap.add(doc);
+                            });
+                        }
 
                         //no need to notify cause doctor is just blocked till there is a new patient
                         //currentDoctor.notify();
