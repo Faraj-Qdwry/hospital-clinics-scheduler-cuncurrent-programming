@@ -1,35 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="94b454ef-213b-4510-b9ad-723c55f9528e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/clinic/Clinic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/clinic/Clinic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/clinic/Doctor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/clinic/Doctor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/clinic/Pateint.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/clinic/Patient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/clinic/Patient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/managment/Department.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/managment/Department.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/managment/Scheduler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/managment/Scheduler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/utilities/DoctorReport.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/utilities/DoctorReport.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/utilities/ReportGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/utilities/ReportGenerator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/utilities/ResFileReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/utilities/ResFileReader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/utilities/Timer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/utilities/Timer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clinic/Clinic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clinic/Clinic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clinic/Doctor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clinic/Doctor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clinic/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clinic/Patient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/managment/Department.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/Department.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/managment/Scheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managment/Scheduler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utilities/DoctorReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/DoctorReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utilities/ReportGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/ReportGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utilities/ResFileReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/ResFileReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utilities/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/Timer.java" afterDir="false" />
-    </list>
+    <list default="true" id="94b454ef-213b-4510-b9ad-723c55f9528e" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -155,7 +127,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-10" />
     <option name="y" value="-10" />
     <option name="width" value="1939" />
@@ -255,10 +227,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5926000" />
+    <option name="totallyTimeSpent" value="6518000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25973153" />
