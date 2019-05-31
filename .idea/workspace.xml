@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c8564cd0-a86f-422f-a6ac-e42c68c63ead" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/clinic/Clinic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/clinic/Clinic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/clinic/Doctor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/clinic/Doctor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/managment/Department.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/managment/Department.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/managment/Scheduler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/managment/Scheduler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/utilities/ResFileReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospital-clinics-scheduler/utilities/ResFileReader.class" afterDir="false" />
-    </list>
+    <list default="true" id="c8564cd0-a86f-422f-a6ac-e42c68c63ead" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
