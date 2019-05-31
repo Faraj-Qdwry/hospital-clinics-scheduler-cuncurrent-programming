@@ -16,16 +16,9 @@ public class Scheduler implements Runnable {
     @Override
     public void run() {
 
-<<<<<<< HEAD
         while (Timer.getCurrentMinute() < 240) {
-            //while (Department.patientQueue.size() > 0) {
-            boolean patientAttended = false;
-=======
-        while (Timer.getCurranTime() < 240) {
             while (Department.patientQueue.size() > 0) {
                 boolean patientAttended = false;
->>>>>>> 0f33571bf4e470cbabfd88d5946fb872c475fd90
-
                 Iterator doctorsIterator = Department.doctorsHeap.iterator();
 
                 IteratorLoop:
@@ -64,16 +57,12 @@ public class Scheduler implements Runnable {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-<<<<<<< HEAD
-
                     sleep(1000);
                     Department.doctorsHeap.add(currentDoctor);
                     break IteratorLoop;
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-=======
->>>>>>> 0f33571bf4e470cbabfd88d5946fb872c475fd90
                 }
             }
         }

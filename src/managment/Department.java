@@ -36,31 +36,25 @@ public class Department {
     // a queue to store the patient queue
     public static BlockingQueue<Patient> patientQueue;
 
-<<<<<<< HEAD
-
     // set the number of doctors available
     public static void setDoctorsAvailable(int doctors) {
         doctorsAvailable = doctors;
     }
 
     static String clinicNames[] = {"C-0 ", "C-1 ", "C-2 ", "C-3 ", "C-4 ", "C-5 ", "C-6 ", "C-7 ", "C-8 ", "C-9 ", "C-10 "};
-=======
-    static String clinicNames[] = {"C-0", "C-1", "C-2", "C-3", "C-4", "C-5", "C-6", "C-7", "C-8", "C-9", "C-10"};
->>>>>>> 0f33571bf4e470cbabfd88d5946fb872c475fd90
-
     public volatile static boolean docListReady = false;
 
 
     // Get doctors list read
     public static void setDoctorListFromFile(ArrayList<Doctor> doctors) {
         doctorsFileList = doctors;
+
     }
 
     // set the number of doctors available
     public static void setDoctorsAvailable(int doctors) {
         doctorsAvailable = doctors;
     }
-
     // set the doctors as ready and available to work
     public static void setDoctorsReady() {
         docListReady = true;

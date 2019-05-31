@@ -31,7 +31,6 @@ public class Doctor implements Callable<DoctorReport> {
             } else {
                 // get and consult next patient
                 Patient patient = clinic.getNextPatient();
-<<<<<<< HEAD
                 if(patient.getId().equalsIgnoreCase("1")){
                     ReportGenerator.addToReport(System.lineSeparator());
                     ReportGenerator.addToReport("Doctors Report:"+System.lineSeparator());
@@ -39,9 +38,7 @@ public class Doctor implements Callable<DoctorReport> {
                 String consultingPatient = Timer.getCurrentTime() + " - Dr. " + id + " is consulting patient " + patient.getId() + " at " + clinic.getId() +" - " + treatedPatients + " patients treated";
                 System.out.println(consultingPatient);
                 ReportGenerator.addToReport(consultingPatient+System.lineSeparator());
-=======
-                System.out.println("Doctor : " + id + " At Clinic : " + clinic.getId() + "Consulting patient : " + patient.getId() + " $$$ " + id + " Treated " + treatedPatients);
->>>>>>> 0f33571bf4e470cbabfd88d5946fb872c475fd90
+
                 doctorReport.consult(patient);
                 sleep(patient.getConsultationTime() * 1000);
                 treatedPatients++;

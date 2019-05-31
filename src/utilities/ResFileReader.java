@@ -25,12 +25,7 @@ public class ResFileReader implements Runnable {
         boolean readPatients = false;
         int arrivalTime = previousPatientTime;
         int consultationTime = 0;
-<<<<<<< HEAD
         ArrayList <Doctor> docs = new ArrayList();
-=======
-        ArrayList doctorList = new ArrayList();
-
->>>>>>> 0f33571bf4e470cbabfd88d5946fb872c475fd90
         try {
             try (Scanner inputStream = new Scanner(new FileInputStream("input.txt"))) {
                 inputStream.useDelimiter(",");
@@ -42,7 +37,6 @@ public class ResFileReader implements Runnable {
                         String doctor = inputStream.next();
                         if (doctor.equalsIgnoreCase("Patients")) {
                             System.out.println("............");
-<<<<<<< HEAD
                             Department.setDoctorList(docs);
                             Department.setDoctorsAvailable(docs.size());
                             Department.readyDocs();
@@ -51,23 +45,19 @@ public class ResFileReader implements Runnable {
                                 ReportGenerator.addToReport("Doctor: "+currentDoctor.getId()+System.lineSeparator());
                             }
 
-=======
                             Department.setDoctorListFromFile(doctorList);
                             Department.setDoctorsAvailable(doctorList.size());
                             Department.setDoctorsReady();
->>>>>>> 0f33571bf4e470cbabfd88d5946fb872c475fd90
                             readPatients = true;
                         } else if (doctor.equalsIgnoreCase("Doctors")) {
                             inputStream.nextLine();
                             doctor = inputStream.next();
                         }
 
-<<<<<<< HEAD
 //                        if (readPatients)
 //                            continue;
-=======
+
                         System.out.println(doctor);
->>>>>>> 0f33571bf4e470cbabfd88d5946fb872c475fd90
                         Doctor doc = new Doctor(doctor, null);
                         doctorList.add(doc);
                         doctorsAvailable++;
@@ -76,7 +66,6 @@ public class ResFileReader implements Runnable {
                         arrivalTime = Integer.parseInt(inputStream.next().trim());
                         consultationTime = Integer.parseInt(inputStream.next().trim());
 
-<<<<<<< HEAD
                         if (Timer.getCurrentMinute()==Timer.WORK_DURATION)
                             return;
 
@@ -86,15 +75,10 @@ public class ResFileReader implements Runnable {
                         else {
                             sleep((arrivalTime - Timer.getCurrentMinute()) * 1000);
                         }
-                        //previousPatientTime = arrivalTime;
-=======
-
                         if (Timer.getCurranTime() >= Timer.WORK_DURATION)
                             return;
 
                         sleep((arrivalTime - Timer.getCurranTime()) * 1000);
->>>>>>> 0f33571bf4e470cbabfd88d5946fb872c475fd90
-
                         Patient patient = new Patient(Integer.toString(++patientId), arrivalTime, consultationTime);
 
                         Department.patientQueue.put(patient);
