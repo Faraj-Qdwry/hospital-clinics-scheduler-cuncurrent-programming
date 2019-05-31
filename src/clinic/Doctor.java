@@ -33,11 +33,13 @@ public class Doctor implements Callable<DoctorReport> {
                 isAvailable = true;
             } else {
                 // get and consult next patient
+                System.out.println("..........get.........");
                 Patient patient = clinic.getNextPatient();
-                System.out.println("Doctor : " + id + " At Clinic : " + clinic.getId() + "Consulting patient : " + patient.getId());
-                System.out.println("Doctor "+id +" Treated "+treatedPatients);
+                System.out.println("Doctor : " + id + " At Clinic : " + clinic.getId() + "Consulting patient : " + patient.getId()+" $$$ "+id+" Treated "+treatedPatients);
+                //System.out.println("Doctor "+id );
                 doctorReport.consult(patient);
                 sleep(patient.getConsultationTime() * 1000);
+
                 treatedPatients++;
                 System.out.println("...................");
             }

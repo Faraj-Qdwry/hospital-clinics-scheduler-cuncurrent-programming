@@ -70,11 +70,9 @@ public class ResFileReader implements Runnable {
                         Patient patient = new Patient(Integer.toString(++patientId), arrivalTime, consultationTime);
 
                         Department.patientQueue.put(patient);
-//                        {
-//                            System.out.println("Patients : " + patientId + " Arrived");
-//                            System.out.println("Arrived At : " + arrivalTime);
-//                            System.out.println("Consultation Time :" + consultationTime);
-//                        }
+
+                        System.out.println("----------- >>  Patients : " + patientId + " Arrived At : " + arrivalTime + " Consultation Time :" + consultationTime);
+
                         //scheduling = false;
                     }
 

@@ -1,9 +1,15 @@
 package managment;
 
 import clinic.Doctor;
+import clinic.Patient;
+import utilities.DoctorReport;
 import utilities.Timer;
 
+import javax.print.Doc;
 import java.util.Iterator;
+import java.util.Stack;
+
+import static java.lang.Thread.sleep;
 
 public class Scheduler implements Runnable {
 
@@ -14,48 +20,65 @@ public class Scheduler implements Runnable {
 
         while (Timer.getCurranTime() < 240) {
             //while (Department.patientQueue.size() > 0) {
-                boolean patientAttended = false;
+            boolean patientAttended = false;
 
-                Iterator doctorsIterator = Department.doctorsHeap.iterator();
-                while (doctorsIterator.hasNext()) {
-                    Doctor currentDoctor = null;
-                    try {
-                        currentDoctor = (Doctor) Department.doctorsHeap.take();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println(currentDoctor.getId());
+            Iterator doctorsIterator = Department.doctorsHeap.iterator();
+
+            IteratorLoop:
+            while (doctorsIterator.hasNext()) {
+                try {
+                    Doctor currentDoctor = Department.doctorsHeap.take();
+
+                    System.out.println("Doc --> " + currentDoctor.getId());
+
                     if (currentDoctor.isAvailable()) {
-                        //System.out.println("--------" + currentDoctor.getTreatedPatients());
-                        //System.out.println("--------" + Department.doctorsHeap.peek().getTreatedPatients());
-
                         //if (currentDoctor.getTreatedPatients()<
-
                         //if (currentDoctor.getTreatedPatients() - Department.doctorsHeap.peek().getTreatedPatients() < 3) {
-                        boolean inserted = false;
-                        try {
-                            inserted = currentDoctor.getClinic().insertPatient(Department.patientQueue.take());
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+
+                        Patient patient = Department.patientQueue.take();
+
+                        boolean inserted = currentDoctor.getClinic().insertPatient(patient);
+
+                        //while doc is full see next doctor // stack is so to return taken doctors after while finish
+                        Stack<Doctor> tempDocs = new Stack();
+                        while (!inserted && currentDoctor.getTreatedPatients() - Department.doctorsHeap.peek().getTreatedPatients() < 3) {
+                            tempDocs.push(currentDoctor);
+                            currentDoctor = Department.doctorsHeap.take();
+                            inserted = currentDoctor.getClinic().insertPatient(patient);
                         }
+
+                        tempDocs.iterator().forEachRemaining((doc) -> {
+                            Department.doctorsHeap.add(doc);
+                        });
+
                         //no need to notify cause doctor is just blocked till there is a new patient
                         //currentDoctor.notify();
-                        if (inserted) {
-                            patientAttended = true;
-                            break;
-                        }else
-                            Department.doctorsHeap.add(currentDoctor);
-                        //}
+
+//                        if (inserted) {
+//                            patientAttended = true;
+//                            break IteratorLoop;
+//                        }
                     }
+
+                    sleep(1000);
+                    Department.doctorsHeap.add(currentDoctor);
+                    System.out.println("*****heap size*******" + Department.doctorsHeap.size());
+                    break IteratorLoop;
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-                //todo heapify doctorsHeap
-                //Department.doctorsHeap.add(Department.doctorsHeap.remove());
+
+            }
+        }
+        //todo heapify doctorsHeap
+        //Department.doctorsHeap.add(Department.doctorsHeap.remove());
 
 //                if (!patientAttended) {
 //                    while (!scheduling) {
 //                    }
 //                }
-            }
-        //}
     }
+    //}
 }
+
