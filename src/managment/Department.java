@@ -33,7 +33,6 @@ public class Department {
     // number of doctors available in the department
     protected static int doctorsAvailable = 0;
     static ArrayList<Doctor> doctorsFileList;
-    //static ArrayList<Doctor> doctorsList;
 
     // a min heap to store all the available doctors that have been assigned to clinics
     protected static PriorityBlockingQueue<Doctor> doctorsHeap;

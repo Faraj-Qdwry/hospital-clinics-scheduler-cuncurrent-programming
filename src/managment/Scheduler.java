@@ -37,10 +37,13 @@ public class Scheduler implements Runnable {
                         boolean patientAssigned = false;
 
                         // add to this doc if allowed
-                        int minTreated = Department.doctorsHeap.peek().getTreatedPatients();
+                        int minDoctorTreatedPatients = Department.doctorsHeap.peek().getTreatedPatients();
 
-                        if (doctor.getTreatedPatients() - minTreated < 3) {
-                            // allowed to add
+                        if (doctor.getTreatedPatients() - minDoctorTreatedPatients < 3) {
+                            /**
+                             * allowed to add patient to this doctor
+                             * as this doctor is not different from minDoctorTreatedPatients by 3
+                             * */
 
                             if (doctor.hasRoomForPatient()) {
                                 // just add
@@ -49,7 +52,7 @@ public class Scheduler implements Runnable {
                                     System.out.println("Patient: " + patient.getId() + " assigned to clinic: " + doctor.getClinic().getId());
                                     patientAssigned = true;
                                 } else {
-                                    //PEINTS INFINITELY
+                                    /** Remove doctor from heap as he can't accept anymore patients*/
                                     boolean remove = Department.doctorsHeap.remove(doctor);
                                     System.out.println("Dr. " + doctor.getId() + "**" + remove + " |||| has no more time for Patient |||| " + patient.getId() + " today!");
                                 }
