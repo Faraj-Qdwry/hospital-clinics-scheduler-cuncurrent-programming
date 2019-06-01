@@ -29,27 +29,26 @@ public class Department {
     // number of doctors available in the department
     protected static int doctorsAvailable = 0;
     static ArrayList<Doctor> doctorsFileList;
-    static ArrayList<Doctor> doctorsList;
+    //static ArrayList<Doctor> doctorsList;
 
     // a min heap to store all the available doctors that have been assigned to clinics
     protected static PriorityBlockingQueue<Doctor> doctorsHeap;
 
     // a queue to store the patient queue
-    public static BlockingQueue<Patient> patientQueue;
+    public static LinkedBlockingDeque<Patient> patientQueue;
 
     // set the number of doctors available
     public static void setDoctorsAvailable(int doctors) {
         doctorsAvailable = doctors;
     }
 
-    static String clinicNames[] = {"C-0", "C-1", "C-2", "C-3", "C-4", "C-5", "C-6", "C-7", "C-8", "C-9", "C-10"};
+    static String clinicNames[] = {"C-1", "C-2", "C-3", "C-4", "C-5", "C-6", "C-7", "C-8", "C-9", "C-10"};
     public volatile static boolean docListReady = false;
 
 
     // Get doctors list read
     public static void setDoctorListFromFile(ArrayList<Doctor> doctors) {
         doctorsFileList = doctors;
-
     }
 
 
@@ -83,6 +82,9 @@ public class Department {
             doctorsHeap.add(doctorObj);
         }
 
+        System.out.println("*******************************************************");
+        System.out.println("******************** Hospital Opened ******************");
+        System.out.println("*******************************************************");
 
         // start the timer thread
         Timer.startTimer();
@@ -101,6 +103,7 @@ public class Department {
         }
 
         doctorsPool.awaitTermination(20, TimeUnit.MINUTES);
+        doctorsPool.shutdown();
     }
 
     private static void initDataStructures(int size) {
@@ -108,7 +111,7 @@ public class Department {
                 Comparator.comparingInt(Doctor::getTreatedPatients)
         );
 
-        patientQueue = new ArrayBlockingQueue<>(size, true);
+        patientQueue = new LinkedBlockingDeque<Patient>();
 
     }
 }

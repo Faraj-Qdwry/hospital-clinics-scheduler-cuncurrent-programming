@@ -33,4 +33,12 @@ public class Clinic {
     public void setId(String id) {
         this.id = id;
     }
+
+    public boolean isFull() {
+        return patients.size() == WAITING_PATENTS_LIMIT;
+    }
+
+    public int getCount() {
+        return patients.size();
+    }
 }

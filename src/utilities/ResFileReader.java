@@ -25,7 +25,7 @@ public class ResFileReader implements Runnable {
         boolean readPatients = false;
         int arrivalTime = previousPatientTime;
         int consultationTime = 0;
-        ArrayList <Doctor> doctorList = new ArrayList();
+        ArrayList<Doctor> doctorList = new ArrayList();
         try {
             try (Scanner inputStream = new Scanner(new FileInputStream("worst input.txt"))) {
                 inputStream.useDelimiter(",");
@@ -40,9 +40,9 @@ public class ResFileReader implements Runnable {
                             Department.setDoctorListFromFile(doctorList);
                             Department.setDoctorsAvailable(doctorList.size());
                             Department.setDoctorsReady();
-                            ReportGenerator.addToReport("Doctors Available: "+ doctorsAvailable + System.lineSeparator());
-                            for(Doctor currentDoctor : doctorList) {
-                                ReportGenerator.addToReport("Doctor: "+currentDoctor.getId()+System.lineSeparator());
+                            ReportGenerator.addToReport("Doctors Available: " + doctorsAvailable + System.lineSeparator());
+                            for (Doctor currentDoctor : doctorList) {
+                                ReportGenerator.addToReport("Doctor: " + currentDoctor.getId() + System.lineSeparator());
                             }
 
                             Department.setDoctorListFromFile(doctorList);
@@ -66,18 +66,20 @@ public class ResFileReader implements Runnable {
                         arrivalTime = Integer.parseInt(inputStream.next().trim());
                         consultationTime = Integer.parseInt(inputStream.next().trim());
 
-                        if (Timer.getCurrentMinute()==Timer.WORK_DURATION)
+                        if (Timer.getCurrentMinute() == Timer.WORK_DURATION ||
+                                (Timer.getCurrentMinute() + consultationTime > Timer.WORK_DURATION)) {
+                            System.out.println("*******************************************************");
+                            System.out.println("******************** Hospital Closed ******************");
+                            System.out.println("*******************************************************");
                             return;
+                        }
 
-                        if(Timer.getCurrentMinute() == 0){
-                            sleep((arrivalTime - Timer.getCurrentMinute()) * 2000);
-                        }
-                        else {
-                            sleep((arrivalTime - Timer.getCurrentMinute()) * 1000);
-                        }
+                        sleep((arrivalTime - Timer.getCurrentMinute()) * 1000);
+
                         Patient patient = new Patient(Integer.toString(++patientId), arrivalTime, consultationTime);
 
-                        Department.patientQueue.put(patient);
+                        //System.out.println("$$$$$$ putting to patient Queue -> size : " + Department.patientQueue.size());
+                        Department.patientQueue.addLast(patient);
 
                         System.out.println("Patient: " + patientId + " Arrived At: " + Timer.getCurrentTime() + " Consultation Time: " + consultationTime + " minutes");
 

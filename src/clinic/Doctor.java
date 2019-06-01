@@ -7,9 +7,10 @@ import java.util.concurrent.Callable;
 import static java.lang.Thread.sleep;
 
 public class Doctor implements Callable<DoctorReport> {
-    private int SLEEP_TIME = 15 * 1000;
+    private int BREAK_TIME = 15;
     private volatile boolean isAvailable = true;
     private volatile int treatedPatients = 0;
+    private volatile int totalWorkingTime = 0;
     private Clinic clinic;
     private String id;
 
@@ -26,18 +27,18 @@ public class Doctor implements Callable<DoctorReport> {
             //check if sleep time
             if (treatedPatients == 8) {
                 isAvailable = false;
-                sleep(SLEEP_TIME);
+                sleep(BREAK_TIME * 1000);
                 isAvailable = true;
             } else {
                 // get and consult next patient
                 Patient patient = clinic.getNextPatient();
-                if(patient.getId().equalsIgnoreCase("1")){
+                if (patient.getId().equalsIgnoreCase("1")) {
                     ReportGenerator.addToReport(System.lineSeparator());
-                    ReportGenerator.addToReport("Doctors Report:"+System.lineSeparator());
+                    ReportGenerator.addToReport("Doctors Report:" + System.lineSeparator());
                 }
-                String consultingPatient = Timer.getCurrentTime() + " - Dr. " + id + " is consulting patient " + patient.getId() + " at " + clinic.getId() +" - " + treatedPatients + " patients treated";
+                String consultingPatient = Timer.getCurrentTime() + " - Dr. " + id + " is consulting patient " + patient.getId() + " at " + clinic.getId() + " - " + treatedPatients + " patients treated";
                 System.out.println(consultingPatient);
-                ReportGenerator.addToReport(consultingPatient+System.lineSeparator());
+                ReportGenerator.addToReport(consultingPatient + System.lineSeparator());
 
                 doctorReport.consult(patient);
                 sleep(patient.getConsultationTime() * 1000);
@@ -55,8 +56,21 @@ public class Doctor implements Callable<DoctorReport> {
         return clinic;
     }
 
+    public void assignPatient(Patient patient) {
+        totalWorkingTime += patient.getConsultationTime();
+        clinic.insertPatient(patient);
+
+        if ((clinic.getCount() + treatedPatients) >= 8) {
+            totalWorkingTime += BREAK_TIME;
+        }
+    }
+
     public boolean isAvailable() {
         return isAvailable;
+    }
+
+    public boolean hasRoomForPatient() {
+        return !clinic.isFull();
     }
 
     public int getTreatedPatients() {
@@ -66,5 +80,9 @@ public class Doctor implements Callable<DoctorReport> {
     public Doctor setClinic(Clinic clinic) {
         this.clinic = clinic;
         return this;
+    }
+
+    public boolean hasTimeFor(Patient patient) {
+        return Timer.WORK_DURATION > (patient.getConsultationTime() + totalWorkingTime);
     }
 }
