@@ -28,3 +28,6 @@ Kerri    |    C-10     |     110     |     8     |     1.0     |     0.0
 ================================================================
 OverAll Report : 
 Number Of Patients Total Visits : 80
+Total Number Of Treated :80
+Total Patients Avg ConsultationTime : 0.0
+Total Patients AvgWaitingTime : 0.375

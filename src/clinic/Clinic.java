@@ -27,6 +27,7 @@ public class Clinic {
     public Patient getNextPatient() throws InterruptedException {
         Patient patient = patients.take();
         patientAvgWaiting.add(Timer.getCurrentMinute() - patient.getArrivalTime());
+        patientsAvgConsultation.add(patient.getConsultationTime());
         return patient;
     }
 
