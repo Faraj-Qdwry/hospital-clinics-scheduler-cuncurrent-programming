@@ -35,7 +35,7 @@ public class DoctorReport {
 
     @Override
     public String toString() {
-        String doctorReport = "doctor "+docId+" at clinic "+clinicId+" patients "+ patients.size();
+        String doctorReport = "Dr. "+docId+" at Clinic: "+clinicId+" treated " + patients.size() + " patients!";
         System.out.println("-----------------");
         try {
             ReportGenerator.addToReport(doctorReport + System.lineSeparator());

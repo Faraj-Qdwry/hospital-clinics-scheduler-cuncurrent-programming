@@ -65,8 +65,7 @@ public class ResFileReader implements Runnable {
                         arrivalTime = Integer.parseInt(inputStream.next().trim());
                         consultationTime = Integer.parseInt(inputStream.next().trim());
 
-                        if (Timer.getCurrentMinute() == Timer.WORK_DURATION ||
-                                (Timer.getCurrentMinute() + consultationTime > Timer.WORK_DURATION)) {
+                        if (Timer.getCurrentMinute() == Timer.WORK_DURATION) {
                             System.out.println("*******************************************************");
                             System.out.println("******************** Hospital Closed ******************");
                             System.out.println("*******************************************************");
@@ -80,12 +79,8 @@ public class ResFileReader implements Runnable {
                         }
 
                         Patient patient = new Patient(Integer.toString(++patientId), arrivalTime, consultationTime);
-
-                        //System.out.println("$$$$$$ putting to patient Queue -> size : " + Department.patientQueue.size());
                         Department.patientQueue.addLast(patient);
-
                         System.out.println("Patient: " + patientId + " Arrived At: " + Timer.getCurrentTime() + " Consultation Time: " + consultationTime + " minutes");
-
                     }
 
                     inputStream.nextLine();

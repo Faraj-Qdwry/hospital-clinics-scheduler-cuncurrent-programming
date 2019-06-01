@@ -23,7 +23,7 @@ public class Timer {
                     return;
                 else
                     try {
-                        System.out.println("Time : " + getCurrentTime());
+                        System.out.println("Time: " + getCurrentTime());
                         sleep(1000);
                         T++;
                     } catch (InterruptedException e) {
