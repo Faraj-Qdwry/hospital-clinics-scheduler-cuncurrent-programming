@@ -45,6 +45,7 @@ public class Doctor implements Callable<DoctorReport> {
                 treatedPatients++;
             }
         }
+        doctorReport.setPatientsAvgWaitingTime(clinic.getPatientsAvgWaitingTime());
         return doctorReport;
     }
 

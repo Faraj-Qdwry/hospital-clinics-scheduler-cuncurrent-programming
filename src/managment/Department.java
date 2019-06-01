@@ -18,14 +18,18 @@ import static java.lang.Thread.sleep;
 
 public class Department {
 
-    /** Initialize runnable and callable references **/
+    /**
+     * Initialize runnable and callable references
+     **/
     protected static ResFileReader fileReader;
     public Scheduler scheduler;
     protected static ReportGenerator reportGenerator;
     static Lock lock = new ReentrantLock();
     public volatile static Condition schedulerCondition = lock.newCondition();
 
-    /** Doctor, clinic and patient Initialization **/
+    /**
+     * Doctor, clinic and patient Initialization
+     **/
     // number of doctors available in the department
     protected static int doctorsAvailable = 0;
     static ArrayList<Doctor> doctorsFileList;
@@ -99,10 +103,10 @@ public class Department {
                 System.out.println(doctorReport.toString());
             } catch (ExecutionException e) {
                 e.printStackTrace();
-        }
+            }
         }
 
-        doctorsPool.awaitTermination(20, TimeUnit.MINUTES);
+        doctorsPool.awaitTermination(5, TimeUnit.MINUTES);
         doctorsPool.shutdown();
     }
 
@@ -112,7 +116,6 @@ public class Department {
         );
 
         patientQueue = new LinkedBlockingDeque<Patient>();
-
     }
 }
 
