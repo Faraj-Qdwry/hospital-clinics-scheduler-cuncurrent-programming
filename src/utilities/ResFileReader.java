@@ -6,13 +6,14 @@ import managment.Department;
 import managment.Scheduler;
 
 import java.io.FileInputStream;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.lang.Thread.sleep;
 
 public class ResFileReader implements Runnable {
+
+    public static volatile int patientNumber = 0;
 
     @Override
     public void run() {
@@ -28,7 +29,7 @@ public class ResFileReader implements Runnable {
         int consultationTime = 0;
         ArrayList<Doctor> doctorList = new ArrayList();
         try {
-            try (Scanner inputStream = new Scanner(new FileInputStream("worst input.txt"))) {
+            try (Scanner inputStream = new Scanner(new FileInputStream("best input.txt"))) {
                 inputStream.useDelimiter(",");
 
                 while (inputStream.hasNextLine()) {
@@ -40,10 +41,11 @@ public class ResFileReader implements Runnable {
                             Department.setDoctorListFromFile(doctorList);
                             Department.setDoctorsAvailable(doctorList.size());
                             Department.setDoctorsReady();
-                            ReportGenerator.addToReport("Doctors Available: " + doctorsAvailable + System.lineSeparator());
-                            for (Doctor currentDoctor : doctorList) {
-                                ReportGenerator.addToReport("Doctor: " + currentDoctor.getId() + System.lineSeparator());
-                            }
+
+//                            ReportGenerator.addToReport("Doctors Available: " + doctorsAvailable + System.lineSeparator());
+//                            for (Doctor currentDoctor : doctorList) {
+//                                ReportGenerator.addToReport("Doctor: " + currentDoctor.getId() + System.lineSeparator());
+//                            }
 
                             Department.setDoctorListFromFile(doctorList);
                             Department.setDoctorsAvailable(doctorList.size());
@@ -70,21 +72,24 @@ public class ResFileReader implements Runnable {
                             System.out.println("*******************************************************");
                             System.out.println("******************** Hospital Closed ******************");
                             System.out.println("*******************************************************");
+                            Department.isOpen = false;
                             return;
                         }
 
-                        if (Timer.getCurrentMinute() == 0){
+                        if (Timer.getCurrentMinute() == 0) {
                             sleep((arrivalTime - Timer.getCurrentMinute()) * 2000);
-                        }else{
+                        } else {
                             sleep((arrivalTime - Timer.getCurrentMinute()) * 1000);
                         }
 
                         Patient patient = new Patient(Integer.toString(++patientId), arrivalTime, consultationTime);
                         Department.patientQueue.addLast(patient);
+                        patientNumber++;
                         System.out.println("Patient: " + patientId + " Arrived At: " + Timer.getCurrentTime() + " Consultation Time: " + consultationTime + " minutes");
                     }
 
-                    inputStream.nextLine();
+                    if (inputStream.hasNextLine())
+                        inputStream.nextLine();
                 }
             }
 

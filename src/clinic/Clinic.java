@@ -10,13 +10,15 @@ public class Clinic {
 
     private int WAITING_PATENTS_LIMIT = 3;
     private ArrayBlockingQueue<Patient> patients;
-    private List<Integer> patienAVGwaiting;
+    private List<Integer> patientAvgWaiting;
+    private List<Integer> patientsAvgConsultation;
     private String id;
 
     public Clinic(String id) {
         this.id = id;
         patients = new ArrayBlockingQueue(WAITING_PATENTS_LIMIT, true);
-        patienAVGwaiting = new ArrayList<>();
+        patientAvgWaiting = new ArrayList<>();
+        patientsAvgConsultation = new ArrayList<>();
     }
 
     /**
@@ -24,7 +26,7 @@ public class Clinic {
      */
     public Patient getNextPatient() throws InterruptedException {
         Patient patient = patients.take();
-        patienAVGwaiting.add(Timer.getCurrentMinute() - patient.getArrivalTime());
+        patientAvgWaiting.add(Timer.getCurrentMinute() - patient.getArrivalTime());
         return patient;
     }
 
@@ -53,7 +55,15 @@ public class Clinic {
     }
 
     public double getPatientsAvgWaitingTime() {
-        return patienAVGwaiting
+        return patientAvgWaiting
+                .stream()
+                .mapToInt((n) -> n)
+                .summaryStatistics()
+                .getAverage();
+    }
+
+    public double getPatientsAvgConsultationTime() {
+        return patientsAvgConsultation
                 .stream()
                 .mapToInt((n) -> n)
                 .summaryStatistics()

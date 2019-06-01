@@ -11,6 +11,18 @@ public class DoctorReport {
     private String clinicId;
     private List<Patient> patients;
     private double patientsAvgWaitingTime;
+    private double patientsAvgConsultationTime;
+    private int totalWorkingTime;
+
+    public int getTreatedPatients() {
+        return treatedPatients;
+    }
+
+    public void setTreatedPatients(int treatedPatients) {
+        this.treatedPatients = treatedPatients;
+    }
+
+    private int treatedPatients;
 
     public DoctorReport(String docId, String clinicId) {
         this.docId = docId;
@@ -34,11 +46,14 @@ public class DoctorReport {
         return patients;
     }
 
+    public static String tableHeader(){
+     return "Doctor | Clinic | Total Working Time | Treated Patients | Patients Avg Waiting Time | patients Avg Consultation Time";
+    }
+
     @Override
     public String toString() {
-        System.out.println("---------------------------------------------------");
-        String doctorReport = "Dr. " + docId + " at Clinic: " + clinicId + " treated " + patients.size() + " patients waited on Avg : " + patientsAvgWaitingTime;
-        System.out.println("---------------------------------------------------");
+        String doctorReport =  docId + "    |    " + clinicId +"     |     " +totalWorkingTime +
+                "     |     " + getTreatedPatients() + "     |     " + patientsAvgWaitingTime + "     |     "+patientsAvgConsultationTime;
         try {
             ReportGenerator.addToReport(doctorReport + System.lineSeparator());
         } catch (IOException e) {
@@ -49,5 +64,21 @@ public class DoctorReport {
 
     public void setPatientsAvgWaitingTime(double patientsAvgWaitingTime) {
         this.patientsAvgWaitingTime = patientsAvgWaitingTime;
+    }
+
+    public double getPatientsAvgWaitingTime() {
+        return patientsAvgWaitingTime;
+    }
+
+    public void setDoctorWorkingTime(int totalWorkingTime) {
+        this.totalWorkingTime = totalWorkingTime;
+    }
+
+    public double getPatientsAvgConsultationTime() {
+        return patientsAvgConsultationTime;
+    }
+
+    public void setPatientsAvgConsultationTime(double patientsAvgConsultationTime) {
+        this.patientsAvgConsultationTime = patientsAvgConsultationTime;
     }
 }

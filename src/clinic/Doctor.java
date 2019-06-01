@@ -1,5 +1,6 @@
 package clinic;
 
+import managment.Department;
 import utilities.*;
 
 import java.util.concurrent.Callable;
@@ -32,13 +33,14 @@ public class Doctor implements Callable<DoctorReport> {
             } else {
                 // get and consult next patient
                 Patient patient = clinic.getNextPatient();
-                if (patient.getId().equalsIgnoreCase("1")) {
-                    ReportGenerator.addToReport(System.lineSeparator());
-                    ReportGenerator.addToReport("Doctors Report:" + System.lineSeparator());
-                }
-                String consultingPatient = Timer.getCurrentTime() + " - Dr. " + id + " is consulting patient " + patient.getId() + " at " + clinic.getId() + " - " + treatedPatients + " patients treated";
-                System.out.println(consultingPatient);
-                ReportGenerator.addToReport(consultingPatient + System.lineSeparator());
+
+//                if (patient.getId().equalsIgnoreCase("1")) {
+//                    ReportGenerator.addToReport(System.lineSeparator());
+//                    ReportGenerator.addToReport("Doctors Report Log :" + System.lineSeparator());
+//                }
+//                String consultingPatient = Timer.getCurrentTime() + " - Dr. " + id + " is consulting patient " + patient.getId() + " at " + clinic.getId() + " - " + treatedPatients + " patients treated";
+//                System.out.println(consultingPatient);
+//                ReportGenerator.addToReport(consultingPatient + System.lineSeparator());
 
                 doctorReport.consult(patient);
                 sleep(patient.getConsultationTime() * 1000);
@@ -46,6 +48,9 @@ public class Doctor implements Callable<DoctorReport> {
             }
         }
         doctorReport.setPatientsAvgWaitingTime(clinic.getPatientsAvgWaitingTime());
+        doctorReport.setDoctorWorkingTime(totalWorkingTime);
+        doctorReport.setTreatedPatients(treatedPatients);
+        doctorReport.setPatientsAvgConsultationTime(clinic.getPatientsAvgConsultationTime());
         return doctorReport;
     }
 
@@ -61,7 +66,8 @@ public class Doctor implements Callable<DoctorReport> {
         totalWorkingTime += patient.getConsultationTime();
         clinic.insertPatient(patient);
 
-        if ((clinic.getCount() + treatedPatients) >= 8) {
+        //todo make sure
+        if (treatedPatients % 8 == 0 && Department.isOpen) {
             totalWorkingTime += BREAK_TIME;
         }
     }

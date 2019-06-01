@@ -33,6 +33,7 @@ public class Department {
     // number of doctors available in the department
     protected static int doctorsAvailable = 0;
     static ArrayList<Doctor> doctorsFileList;
+    public static volatile boolean isOpen = true;
 
     // a min heap to store all the available doctors that have been assigned to clinics
     protected static PriorityBlockingQueue<Doctor> doctorsHeap;
@@ -95,18 +96,69 @@ public class Department {
         // start a scheduler thread
         new Thread(new Scheduler()).start();
 
+        ArrayList<DoctorReport> docReports = new ArrayList<>();
+
+        try {
+            ReportGenerator.addToReport(System.lineSeparator());
+            ReportGenerator.addToReport("Doctors Available: " + doctorsAvailable + System.lineSeparator());
+            for (Doctor currentDoctor : doctorsFileList) {
+                ReportGenerator.addToReport("Doctor: " + currentDoctor.getId() + System.lineSeparator());
+            }
+
+            ReportGenerator.addToReport("Doctors Performance Report : " + System.lineSeparator());
+            ReportGenerator.addToReport("----------------------------------------------------------------" + System.lineSeparator());
+            ReportGenerator.addToReport(DoctorReport.tableHeader() + System.lineSeparator());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         // Future Objects for report generation
         for (Future report : futures) {
             try {
                 DoctorReport doctorReport = (DoctorReport) report.get();
-                System.out.println(doctorReport.toString());
+                docReports.add(doctorReport);
+                generateDocReport(doctorReport);
+                //System.out.println(doctorReport.toString());
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
         }
+        try {
+            ReportGenerator.addToReport("----------------------------------------------------------------" + System.lineSeparator());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        generateOverAllReport(docReports);
 
         doctorsPool.awaitTermination(5, TimeUnit.MINUTES);
         doctorsPool.shutdown();
+    }
+
+    private static void generateOverAllReport(ArrayList<DoctorReport> docReports) {
+        int numberOfTotalVisits = ResFileReader.patientNumber;
+        try {
+            ReportGenerator.addToReport("================================================================" + System.lineSeparator());
+            ReportGenerator.addToReport("OverAll Report : " + System.lineSeparator());
+            ReportGenerator.addToReport("Number Of Patients Total Visits : " + numberOfTotalVisits + System.lineSeparator());
+
+            int totalTreated = docReports.stream().mapToInt((report)->report.getTreatedPatients()).sum();
+            double totalPatientsAvgConsultationTime = docReports.stream().mapToDouble((report)->report.getPatientsAvgConsultationTime()).summaryStatistics().getAverage();
+            double totalPatientsAvgWaitingTime = docReports.stream().mapToDouble((report)->  report.getPatientsAvgWaitingTime()).summaryStatistics().getAverage();
+
+            ReportGenerator.addToReport("Total Number Of Treated :" + totalTreated + System.lineSeparator());
+            ReportGenerator.addToReport("Total Patients Avg ConsultationTime : " + totalPatientsAvgConsultationTime + System.lineSeparator());
+            ReportGenerator.addToReport("Total Patients AvgWaitingTime : " + totalPatientsAvgWaitingTime + System.lineSeparator());
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private static void generateDocReport(DoctorReport doctorReport) {
+        System.out.println(doctorReport.toString());
     }
 
     private static void initDataStructures(int size) {
@@ -114,7 +166,7 @@ public class Department {
                 Comparator.comparingInt(Doctor::getTreatedPatients)
         );
 
-        patientQueue = new LinkedBlockingDeque<Patient>();
+        patientQueue = new LinkedBlockingDeque<>();
     }
 }
 
