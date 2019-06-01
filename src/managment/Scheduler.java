@@ -40,20 +40,24 @@ public class Scheduler implements Runnable {
                                 // just add
                                 if (doctor.hasTimeFor(patient)) {
                                     doctor.assignPatient(patient);
-                                    System.out.println(" patient : " + patient.getId() + " ----> " + " clinic : " + doctor.getClinic().getId());
+                                    System.out.println("Patient: " + patient.getId() + " assigned to clinic: " + doctor.getClinic().getId());
                                     patientAssigned = true;
                                 } else {
-                                    System.out.println("Doctor : " + doctor.getId() + " has no more time for Patient" + patient.getId() + " today !");
+                                    System.out.println("Dr. " + doctor.getId() + " has no more time for Patient " + patient.getId() + " today!");
                                 }
                             }
                         }
 
-                        if (patientAssigned)
+                        if (patientAssigned) {
                             // re-heapify
                             Department.doctorsHeap.add(Department.doctorsHeap.take());
+                        }
                         else {
                             Department.patientQueue.addFirst(patient);
-                            System.out.println(" patient : " + patient.getId() + " <<<<< " + " back to common waiting ");
+                            if (!patient.isWaiting()) {
+                                patient.goToCommonWaiting();
+                                System.out.println("Patient: " + patient.getId() + " will go to common waiting room");
+                            }
                         }
                     } else {
                         //System.out.println("Doctor : " + doctor.getId() + " is in 15 mins a break");

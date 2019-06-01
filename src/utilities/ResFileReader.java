@@ -36,7 +36,6 @@ public class ResFileReader implements Runnable {
                     if (!readPatients) {
                         String doctor = inputStream.next();
                         if (doctor.equalsIgnoreCase("Patients")) {
-                            System.out.println("............");
                             Department.setDoctorListFromFile(doctorList);
                             Department.setDoctorsAvailable(doctorList.size());
                             Department.setDoctorsReady();
@@ -74,7 +73,11 @@ public class ResFileReader implements Runnable {
                             return;
                         }
 
-                        sleep((arrivalTime - Timer.getCurrentMinute()) * 1000);
+                        if (Timer.getCurrentMinute() == 0){
+                            sleep((arrivalTime - Timer.getCurrentMinute()) * 2000);
+                        }else{
+                            sleep((arrivalTime - Timer.getCurrentMinute()) * 1000);
+                        }
 
                         Patient patient = new Patient(Integer.toString(++patientId), arrivalTime, consultationTime);
 

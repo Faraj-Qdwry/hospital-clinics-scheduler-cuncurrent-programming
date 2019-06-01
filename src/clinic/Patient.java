@@ -5,12 +5,17 @@ public class Patient {
     private String id ;
     private int arrivalTime;
     private int consultationTime;
+    private boolean waiting = false;
 
     public Patient(String id, int arrivalTime, int consultationTime) {
         this.id = id;
         this.arrivalTime = arrivalTime;
         this.consultationTime = consultationTime;
     }
+
+    public  void goToCommonWaiting(){ waiting = true; }
+
+    public  boolean isWaiting() { return waiting; }
 
     public String  getId() {
         return id;
