@@ -3,6 +3,7 @@ package utilities;
 import clinic.Doctor;
 import clinic.Patient;
 import managment.Department;
+import managment.Scheduler;
 
 import java.io.FileInputStream;
 import java.sql.Time;
@@ -65,7 +66,7 @@ public class ResFileReader implements Runnable {
                         arrivalTime = Integer.parseInt(inputStream.next().trim());
                         consultationTime = Integer.parseInt(inputStream.next().trim());
 
-                        if (Timer.getCurrentMinute() == Timer.WORK_DURATION) {
+                        if (Timer.getCurrentMinute() == Timer.WORK_DURATION || Scheduler.isAllDoctorsFull) {
                             System.out.println("*******************************************************");
                             System.out.println("******************** Hospital Closed ******************");
                             System.out.println("*******************************************************");

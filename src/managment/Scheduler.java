@@ -11,11 +11,17 @@ import static java.lang.Thread.sleep;
 public class Scheduler implements Runnable {
 
     public volatile static boolean scheduling = true;
+    public volatile static boolean isAllDoctorsFull = false;
+
 
     @Override
     public void run() {
 
-        while (Timer.getCurrentMinute() < Timer.WORK_DURATION) {
+        System.out.println("/////////////////////////// Start Scheduling //////////////////////////");
+        while (Timer.getCurrentMinute() < Timer.WORK_DURATION && !isAllDoctorsFull) {
+
+            if (Department.doctorsHeap.isEmpty())
+                isAllDoctorsFull = true;
 
             Iterator doctorsIterator = Department.doctorsHeap.iterator();
 
@@ -44,7 +50,8 @@ public class Scheduler implements Runnable {
                                     patientAssigned = true;
                                 } else {
                                     //PEINTS INFINITELY
-                                    System.out.println("Dr. " + doctor.getId() + " has no more time for Patient " + patient.getId() + " today!");
+                                    boolean remove = Department.doctorsHeap.remove(doctor);
+                                    System.out.println("Dr. " + doctor.getId() + "**" + remove + " |||| has no more time for Patient |||| " + patient.getId() + " today!");
                                 }
                             }
                         }
@@ -52,8 +59,7 @@ public class Scheduler implements Runnable {
                         if (patientAssigned) {
                             // re-heapify
                             Department.doctorsHeap.add(Department.doctorsHeap.take());
-                        }
-                        else {
+                        } else {
                             Department.patientQueue.addFirst(patient);
                             if (!patient.isWaiting()) {
                                 patient.goToCommonWaiting();
@@ -68,5 +74,6 @@ public class Scheduler implements Runnable {
                 }
             }
         }
+        System.out.println("/////////////////////////// End Scheduling //////////////////////////");
     }
 }

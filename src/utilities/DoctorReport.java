@@ -10,6 +10,7 @@ public class DoctorReport {
     private String docId;
     private String clinicId;
     private List<Patient> patients;
+    private double patientsAvgWaitingTime;
 
     public DoctorReport(String docId, String clinicId) {
         this.docId = docId;
@@ -35,13 +36,18 @@ public class DoctorReport {
 
     @Override
     public String toString() {
-        String doctorReport = "Dr. "+docId+" at Clinic: "+clinicId+" treated " + patients.size() + " patients!";
-        System.out.println("-----------------");
+        System.out.println("---------------------------------------------------");
+        String doctorReport = "Dr. " + docId + " at Clinic: " + clinicId + " treated " + patients.size() + " patients waited on Avg : " + patientsAvgWaitingTime;
+        System.out.println("---------------------------------------------------");
         try {
             ReportGenerator.addToReport(doctorReport + System.lineSeparator());
         } catch (IOException e) {
             e.printStackTrace();
         }
         return doctorReport;
+    }
+
+    public void setPatientsAvgWaitingTime(double patientsAvgWaitingTime) {
+        this.patientsAvgWaitingTime = patientsAvgWaitingTime;
     }
 }
