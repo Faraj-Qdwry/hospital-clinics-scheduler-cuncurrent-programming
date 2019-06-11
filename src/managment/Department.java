@@ -142,9 +142,25 @@ public class Department {
             ReportGenerator.addToReport("OverAll Report : " + System.lineSeparator());
             ReportGenerator.addToReport("Number Of Patients Total Visits : " + numberOfTotalVisits + System.lineSeparator());
 
-            int totalTreated = docReports.stream().mapToInt((report)->report.getTreatedPatients()).sum();
-            double totalPatientsAvgConsultationTime = docReports.stream().mapToDouble((report)->report.getPatientsAvgConsultationTime()).summaryStatistics().getAverage();
-            double totalPatientsAvgWaitingTime = docReports.stream().mapToDouble((report)->  report.getPatientsAvgWaitingTime()).summaryStatistics().getAverage();
+            int totalTreated = 
+                docReports
+                       .stream()
+                       .mapToInt((report)->report.getTreatedPatients())
+                       .sum();
+            
+            double totalPatientsAvgConsultationTime = 
+                docReports
+                        .stream()
+                        .mapToDouble((report)->report.getPatientsAvgConsultationTime())
+                        .summaryStatistics()
+                        .getAverage();
+            
+            double totalPatientsAvgWaitingTime = 
+                docReports
+                        .stream()
+                        .mapToDouble((report)->  report.getPatientsAvgWaitingTime())
+                        .summaryStatistics()
+                         .getAverage();
 
             ReportGenerator.addToReport("Total Number Of Treated :" + totalTreated + System.lineSeparator());
             ReportGenerator.addToReport("Total Patients Avg ConsultationTime : " + totalPatientsAvgConsultationTime + System.lineSeparator());
